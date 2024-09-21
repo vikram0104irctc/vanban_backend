@@ -1,15 +1,15 @@
 const { taskModel } = require("../model/task.model");
 
-const getAllTask = (req, res) => {
+const getAllTask = async (req, res) => {
   const { id, status, page, limit } = req.params;
   const query = {};
   query.userId = id;
-  query._status = status;
+  query.status = status;
   try {
-    const data = taskModel
+    const data = await taskModel
       .find(query)
-      .skip((page - 1) * limit)
-      .limit(limit);
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .limit(parseInt(limit));
     res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "Server error" });
