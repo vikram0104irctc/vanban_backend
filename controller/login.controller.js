@@ -19,7 +19,7 @@ const loginUser = async (req, res) => {
       },
       key
     );
-    res.status(200).json({ authenticateToken: `Barear ${token}`, role: user.role });
+    res.status(200).json({ authenticateToken: `Barear ${token}`, role: user.role, userId : user._id });
   } catch (e) {
     return res.status(500).json({ message: "Server error" });
   }
